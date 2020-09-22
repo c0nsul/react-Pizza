@@ -6,6 +6,7 @@ import {Header,Categories,SortPopup} from './components'
 
 function App() {
   const types = ['Мясные','Вегетарианская','Гриль','Острые','Закрытые']
+  const sortTypes = ['Популярности', "Цене", "Алфавиту"]
 
   return (
       <div className="wrapper">
@@ -17,7 +18,7 @@ function App() {
 
                       <Categories items={types}  />
 
-                      <SortPopup/>
+                      <SortPopup items={sortTypes}/>
                   </div>
                   <h2 className="content__title">Все пиццы</h2>
                   <div className="content__items">

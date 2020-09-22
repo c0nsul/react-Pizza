@@ -50,6 +50,10 @@ function Categories({items}) {
     //деструктуризация
     const [activeItem, setActiveItem] = useState(null)
 
+    const onSelectItem = index => {
+            setActiveItem(index)
+    }
+
     return (
         <div className="categories">
             <ul>
@@ -62,7 +66,7 @@ function Categories({items}) {
                 {
                     items && items.map ((name, index) => (
                         <li
-                            onClick={() => setActiveItem(index)}
+                            onClick={() => onSelectItem(index)}
                             className={activeItem === index ? 'active' : ''}
                             key={`${name}_${index}`}
                         >

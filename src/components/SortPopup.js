@@ -1,10 +1,41 @@
 import React, {useState} from 'react';
 
-function SortPopup () {
-    const [visiable, setVisiable] = React.useState(false)
+function SortPopup ({items}) {
+    const [visiable, setVisiable] = useState(false)
+    const [activeItem, setActiveItem] = useState(0)
+    const selectedSorting = items[activeItem];
+
+    //ссылка на дом
+    const sortRef = React.useRef(null);
+
+    const onSelectItem = (index) => {
+        setActiveItem(index)
+        setVisiable(false)
+    }
+
+    //исключаем лишний ререндер
+    const toggleVissiblePopup = () => {
+        setVisiable(!visiable)
+    }
+
+    //close popup if click outside popup BLOCK
+    const handleOutsideClick = (e) => {
+        if (!e.path.includes(sortRef.current)){
+            setVisiable(false)
+        }
+    }
+
+    React.useEffect(
+        () => {
+            document.body.addEventListener('click', handleOutsideClick)
+        },[]
+    )
 
     return (
-        <div className="sort">
+        <div
+            ref={sortRef} //ахренеть... магия бл
+            className="sort"
+        >
             <div className="sort__label">
                 <svg
                     width="10"
@@ -19,14 +50,23 @@ function SortPopup () {
                     />
                 </svg>
                 <b>Сортировка по:</b>
-                <span onClick={()=>setVisiable(!visiable)}>популярности</span>
+                <span onClick={toggleVissiblePopup}>{selectedSorting}</span>
             </div>
+
+
             {visiable &&
                 <div className="sort__popup" >
                     <ul>
-                        <li className="active">популярности</li>
-                        <li>цене</li>
-                        <li>алфавиту</li>
+                        {items && items.map((name, index) => (
+                            <li
+                                onClick={() => {onSelectItem(index)}}
+                                className={activeItem === index ? 'active' : ''}
+                                key={`${name}_${index}`}
+                            >
+                                {name}
+                            </li>
+                        ))
+                        }
                     </ul>
                 </div>
 
