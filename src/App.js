@@ -6,7 +6,7 @@ import {Header} from './components'
 import {Home, Cart} from "./pages";
 import {Route} from 'react-router-dom'
 
-import {setPizzas as setPizzasAction} from "./redux/actions/pizzas";
+import {setPizzas} from "./redux/actions/pizzas";
 
 
 
@@ -38,13 +38,12 @@ class App extends React.Component {
 
     componentDidMount() {
         axios.get('http://localhost:3000/db.json').then(({data}) => {
-            this.props.dispatch(setPizzasAction(data.pizzas))
+            //this.props.dispatch(setPizzasAction(data.pizzas))
+            this.props.setPizzas(data.pizzas)
         })
-        console.log('loader',this.props.items)
     }
 
     render () {
-        console.log('render',this.props.items)
        return (
             <div className="wrapper">
                 <Header/>
@@ -59,14 +58,14 @@ class App extends React.Component {
 
 const mapStateToProps = (state) =>  {
     return {
-        items: state.pizzas.items
+        items: state.pizzas.items,
+        filter: state.filters
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        setPizzas: (items) => dispatch(setPizzasAction(items)),
-        dispatch,
+        setPizzas: (items) => dispatch(setPizzas(items)),
     }
 }
 
