@@ -10,51 +10,26 @@ import {setPizzas} from "./redux/actions/pizzas";
 
 
 
-/*
-function App() {
-    //const [pizzas, setPizzas] = useState([])
+function App ({setPizzas, items}) {
 
-    useEffect(() => {
+    React.useEffect(() => {
         axios.get('http://localhost:3000/db.json').then(({data}) => {
             setPizzas(data.pizzas)
         })
     },[])
 
-        return (
-            <div className="wrapper">
-                <Header/>
-                <div className="content">
-                    <Route path="/" render={() => <Home items={pizzas}/>} exact/>
-                    <Route path="/cart" component={Cart} exact/>
-                </div>
+    return (
+        <div className="wrapper">
+            <Header/>
+            <div className="content">
+                <Route path="/" render={() => <Home items={items}/>} exact/>
+                <Route path="/cart" component={Cart} exact/>
             </div>
-        )
-    }
-
-
-*/
-
-class App extends React.Component {
-
-    componentDidMount() {
-        axios.get('http://localhost:3000/db.json').then(({data}) => {
-            //this.props.dispatch(setPizzasAction(data.pizzas))
-            this.props.setPizzas(data.pizzas)
-        })
-    }
-
-    render () {
-       return (
-            <div className="wrapper">
-                <Header/>
-                <div className="content">
-                    <Route path="/" render={() => <Home items={this.props.items}/>} exact/>
-                    <Route path="/cart" component={Cart} exact/>
-                </div>
-            </div>
-        )
-    }
+        </div>
+    )
 }
+
+
 
 const mapStateToProps = (state) =>  {
     return {
