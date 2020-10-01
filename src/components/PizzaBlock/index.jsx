@@ -2,6 +2,7 @@ import React, {useState} from "react"
 import classNames from 'classnames'
 import propTypes from 'prop-types'
 
+
 function PizzaBlock ({name, imageUrl, price, types, sizes}) {
 
     const availableTypes = ['тонкое', 'традиционное']
@@ -18,7 +19,8 @@ function PizzaBlock ({name, imageUrl, price, types, sizes}) {
     }
 
 
-        return (
+
+    return (
         <div className="pizza-block">
             <img
                 className="pizza-block__image"
