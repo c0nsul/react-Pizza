@@ -2,7 +2,7 @@ import React from "react"
 import emptyImg from "../assets/img/empty-cart.png"
 import {CartItem} from "../components"
 import {useSelector,useDispatch} from "react-redux"
-import {clearCart, removeCartItem} from "../redux/actions/cart"
+import {clearCart, removeCartItem, plusCartItem, minusCartItem} from "../redux/actions/cart"
 import {Link} from 'react-router-dom'
 
 const Cart = React.memo(function Cart () {
@@ -26,6 +26,13 @@ const Cart = React.memo(function Cart () {
         }
     }
 
+    const onPlusItem = (id) => {
+        dispatch(plusCartItem(id))
+    }
+
+    const onMinusItem = (id) => {
+        dispatch(minusCartItem(id))
+    }
 
     return (
         <div className="container container--cart">
@@ -83,6 +90,8 @@ const Cart = React.memo(function Cart () {
                                 imageUrl={obj.imageUrl}
                                 totalCount={items[obj.id].items.length}
                                 onRemove={onRemoveItem}
+                                onPlusItem={onPlusItem}
+                                onMinusItem={onMinusItem}
                             />
                             )
                         )
