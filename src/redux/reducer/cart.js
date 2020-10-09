@@ -1,3 +1,5 @@
+import {any} from "prop-types";
+
 const initialState = {
     items: {},
     totalPrice: 0,
@@ -6,17 +8,19 @@ const initialState = {
 
 const getTotalPrice = (arr) => arr.reduce((sum, obj) => obj.price + sum, 0)
 
-const getTotalSum = (obj, key) => {
-    const [firstKey, ...keys] = key.split('.')
-    return Object.keys(obj).reduce((sum, key) => {
-        const value = keys.reduce((val, key) => {
-            if (typeof val[key] === 'object') {
-                return val[key]
-            } else {
-                return val
-            }
-        }, obj[firstKey])
-        return sum
+const _get = (obj, path) => {
+    const [firstKey, ...keys] = path.split('.')
+    return keys.reduce((val, key) => {
+        return val[key]
+    },obj[firstKey])
+}
+
+const getTotalSum = (obj, path) => {
+
+    return Object.values(obj).reduce((sum, obj) => {
+        const value = _get(obj, path)
+        return sum+value
+
         }, 0)
 }
 
