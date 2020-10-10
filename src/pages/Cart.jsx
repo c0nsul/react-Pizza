@@ -1,6 +1,6 @@
 import React from "react"
 import emptyImg from "../assets/img/empty-cart.png"
-import {CartItem} from "../components"
+import {CartItem, Button} from "../components"
 import {useSelector,useDispatch} from "react-redux"
 import {clearCart, removeCartItem, plusCartItem, minusCartItem} from "../redux/actions/cart"
 import {Link} from 'react-router-dom'
@@ -32,6 +32,10 @@ const Cart = React.memo(function Cart () {
 
     const onMinusItem = (id) => {
         dispatch(minusCartItem(id))
+    }
+
+    const onClickOrder = () => {
+        console.log('Your order', items)
     }
 
     return (
@@ -104,16 +108,15 @@ const Cart = React.memo(function Cart () {
                         <span> Сумма заказа: <b>{totalPrice} руб.</b> </span>
                     </div>
                     <div className="cart__bottom-buttons">
-                        <a href="/" className="button button--outline button--add go-back-btn">
+                        <Link to="/" className="button button--black button--add go-back-btn">
                             <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M7 13L1 6.93015L6.86175 1" stroke="#D3D3D3" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                             </svg>
-
-                            <span>Вернуться назад</span>
-                        </a>
-                        <div className="button pay-btn">
+                                <span>Вернуться назад</span>
+                        </Link>
+                        <Button onClick={onClickOrder} className="button pay-btn">
                             <span>Оплатить сейчас</span>
-                        </div>
+                        </Button>
                     </div>
                 </div>
             </div>
