@@ -22,7 +22,6 @@ const getTotalSum = (obj, path) => {
     }, 0)
 }
 
-
 const cart = (state = initialState, action) => {
 
     switch (action.type) {
@@ -117,7 +116,6 @@ const cart = (state = initialState, action) => {
                 totalPrice
             }
         }
-
 
         case 'REMOVE_CART_ITEM': {
             const newItems = {

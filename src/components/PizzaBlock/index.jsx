@@ -3,11 +3,10 @@ import classNames from 'classnames'
 import propTypes from 'prop-types'
 import Button from '../Button'
 
-
-function PizzaBlock ({id, name, imageUrl, price, types, sizes, onClickAddPizza, addedCount}) {
+function PizzaBlock({id, name, imageUrl, price, types, sizes, onClickAddPizza, addedCount}) {
 
     const availableTypes = ['тонкое', 'традиционное']
-    const availableSizes = [26,30,40]
+    const availableSizes = [26, 30, 40]
 
     const [activeType, setActiveType] = useState(types[0])
     const [activeSize, setActiveSize] = useState(0)
@@ -44,8 +43,8 @@ function PizzaBlock ({id, name, imageUrl, price, types, sizes, onClickAddPizza, 
                     {availableTypes.map((type, index) =>
                         <li
                             key={type}
-                            onClick = {()=>onSelectType(index)}
-                            className = {classNames({
+                            onClick={() => onSelectType(index)}
+                            className={classNames({
                                 'active': activeType === index,
                                 'disabled': !types.includes(index)
                             })}
@@ -60,8 +59,8 @@ function PizzaBlock ({id, name, imageUrl, price, types, sizes, onClickAddPizza, 
                     {availableSizes.map((size, index) => (
                         <li
                             key={size}
-                            onClick = {()=>onSelectSize(index)}
-                            className = {classNames({
+                            onClick={() => onSelectSize(index)}
+                            className={classNames({
                                 'active': activeSize === index,
                                 'disabled': !sizes.includes(size)
                             })}
@@ -95,15 +94,14 @@ function PizzaBlock ({id, name, imageUrl, price, types, sizes, onClickAddPizza, 
     )
 }
 
-
 PizzaBlock.propTypes = {
     name: propTypes.string.isRequired,
     imageUrl: propTypes.string.isRequired,
     price: propTypes.number.isRequired,
     types: propTypes.arrayOf(propTypes.number).isRequired,
     sizes: propTypes.arrayOf(propTypes.number).isRequired,
-    onClickAddPizza:propTypes.func,
-    addedCount:propTypes.number
+    onClickAddPizza: propTypes.func,
+    addedCount: propTypes.number
 }
 
 
